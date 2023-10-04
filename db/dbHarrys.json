@@ -1,0 +1,13 @@
+{
+  "productos": [
+    {
+      "id": 10,
+      "nombre": "Metronomo",
+      "descripcion": "Sonar",
+      "precio": 10000,
+      "cantidad": 200,
+      "fecha": "2023-09-21T09:36:26:363Z"
+     }
+
+  ]
+    }
