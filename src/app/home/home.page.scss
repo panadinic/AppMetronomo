@@ -1,0 +1,56 @@
+.content-grid {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.tempovariation,
+.volumen {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.custom-box {
+  padding: 1rem;
+}
+
+
+
+
+/* Define la animación fade-in */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fade-in 4.0s ease-out; /* Aplica la animación */
+}
+
+
+/* Estilo para el contenedor del icono de volumen */
+.custom-volume-icon {
+  display: flex;
+  justify-content: flex-start; /* Alinea el icono a la izquierda */
+  align-items: flex-start; /* Alinea verticalmente arriba */
+}
+
+/* Estilo para el icono de volumen */
+.volume-icon {
+  font-size: 32px; /* Tamaño personalizado */
+  transform: translateY(-40px); /* Ajusta la posición vertical hacia arriba */
+}
+
