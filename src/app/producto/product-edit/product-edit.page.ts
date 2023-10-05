@@ -17,7 +17,7 @@ export class ProductEditPage implements OnInit {
   // FormGroup para validaciones
   productForm!: FormGroup;
   // Esquema a utilizar en el Html
-  producto: ClProducto = { id: 1, nombre: '', descripcion: '', precio: 0, fecha: new Date(), cantidad: 0 };
+  producto: ClProducto = { id: 1, nombre: '', descripcion: '', precio: 0, fecha: new Date()};
   id: any = '';
   //prod_name: string = '';
   //prod_desc: string = '';
@@ -40,8 +40,7 @@ export class ProductEditPage implements OnInit {
     this.productForm = this.formBuilder.group({
       'prod_name': [null, Validators.required],
       'prod_desc': [null, Validators.required],
-      'prod_price': [null, Validators.required],
-      'prod_cantidad': [null, Validators.required]
+      'prod_price': [null, Validators.required]
     });
   }
   async onFormSubmit(form: NgForm) {
@@ -87,8 +86,7 @@ export class ProductEditPage implements OnInit {
             this.productForm.setValue({
               prod_name: data.nombre,
               prod_desc: data.descripcion,
-              prod_price: data.precio,
-              prod_cantidad: data.cantidad
+              prod_price: data.precio
             });
             loading.dismiss();
           }

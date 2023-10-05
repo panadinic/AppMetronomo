@@ -22,7 +22,7 @@ export class ProductAddPage implements OnInit {
     , descripcion: 'El Ingenioso'
     , precio: 100
     , fecha: new Date()
-    , cantidad: 200
+    
   };
 
   // Injectamos FormBuilder, el cual nos permitirá realizar validaciones                         

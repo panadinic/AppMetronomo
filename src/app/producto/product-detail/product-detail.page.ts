@@ -20,7 +20,7 @@ export class ProductDetailPage implements OnInit {
     , descripcion: 'El Ingenioso'
     , precio: 100
     , fecha: new Date()
-    , cantidad: 200
+    
   };
 
   // Injectamos Librerías a utilizar
