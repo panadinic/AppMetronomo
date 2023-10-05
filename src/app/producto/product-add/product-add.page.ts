@@ -3,9 +3,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClProducto } from '../model/ClProducto';
-
-import { ProductServiceService } from '../product-service.service';
-
+import { ProductServiceService } from 'src/app/producto/product-service.service';
 
 @Component({
   selector: 'app-product-add',
