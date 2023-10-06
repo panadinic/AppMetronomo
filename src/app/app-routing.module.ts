@@ -19,10 +19,7 @@ const routes: Routes = [
     path: 'resetpass',
     loadChildren: () => import('./resetpass/resetpass.module').then( m => m.ResetpassPageModule)
   },
-  {
-    path: '**',
-    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
-  },
+
   {
     path: 'product-add',
     loadChildren: () => import('./producto/product-add/product-add.module').then( m => m.ProductAddPageModule)
@@ -43,7 +40,11 @@ const routes: Routes = [
     path: 'product-list',
     loadChildren: () => import('./producto/product-list/product-list.module').then( m => m.ProductListPageModule)
   },
-
+//   {
+//     path: '**',
+//     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+//   },
+// ##
 
 ];
 
