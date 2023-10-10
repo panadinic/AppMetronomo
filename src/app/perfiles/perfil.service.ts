@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
     // providedIn: 'root', No Es necesario incluirlos en las librerías
     providedIn: 'root'
 })
-export class ClienteService {
+export class PerfilService {
     // Creamos un Arreglo del tipo IRegistro
     private registros: ClPerfil[] =
         [{ id: "122", usuario: "Juan Gabriel", correo: "picapiedrax@harrys.cl", clave: "1134" , fechanacimiento: "12/12/1999" }
