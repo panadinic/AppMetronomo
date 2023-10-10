@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteService  } from '../perfil.service';
+import { PerfilService  } from '../perfil.service';
 
 @Component({
   selector: 'app-perfil-act',
@@ -18,7 +18,7 @@ export class PerfilActPage {
 
   // Observe que en el constructor injectamos el ClienteService
   // Le asignamos un nombre el cual utilizaremos más adelante
-  constructor(private cliServ:ClienteService) { }
+  constructor(private cliServ:PerfilService) { }
 
   grabar() { 
       // Invocamos al método creado en el servicio
