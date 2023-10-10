@@ -42,7 +42,7 @@ export class ProductAddPage implements OnInit {
       "prod_name": [null, Validators.required],
       'prod_desc': [null, Validators.required],
       'prod_price': [null, Validators.required],
-      'prod_cantidad': [null, Validators.required]
+      // 'prod_cantidad': [null, Validators.required]
     });
   }
   // se ejecutará cuando presione el Submit
