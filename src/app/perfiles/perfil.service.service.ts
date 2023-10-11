@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 // Importamos  las librerías necesarias
 // creamos Constantes que utilizaremos en el envio
-const apiUrl = "http://localhost:3000/productos";
+const apiUrl = "http://localhost:3000/usuarios";
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
 @Injectable({
@@ -53,13 +53,13 @@ export class PerfilServiceService {
 
 
   //  Obtener un Producto
-  getPerfil(id: Number): Observable<ClPerfil> {
+  getPerfil(id: number): Observable<ClPerfil> {
     //const url = '${apiUrl}/${id}';
     //return this.http.get<Producto>(url).pipe(
     console.log("getPerfil ID:" + id);
     return this.http.get<ClPerfil>(apiUrl + "/" + id)
       .pipe(
-        tap(_ => console.log('fetched perfils id=${id}')),
+        tap(_ => console.log('fetched perfil id=${id}')),
         catchError(this.handleError<ClPerfil>('getPerfil id=${id}'))
       );
   }
