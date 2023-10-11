@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 
 // Importamos  las librerías necesarias
 // creamos Constantes que utilizaremos en el envio
-const apiUrl = "http://localhost:3000/productos";
+const apiUrl = "http://localhost:3000/usuarios";
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
 @Injectable({
@@ -29,15 +29,15 @@ export class PerfilServiceService {
   // Método Agregar perfil, y devuelve un observable del tipo perfil
   // Debe ser un Observable si deses suscribir este método en otro lado
   addPerfil(perfil: ClPerfil): Observable<ClPerfil> {
-    console.log("Res-api Enviando AddProducto : ", perfil);
+    console.log("Res-api Enviando AddPerfil : ", perfil);
     // Ojo No lo ejecuta lo declara
     // El Pipe lo intercepta
     return this.http.post<ClPerfil>(apiUrl, perfil, httpOptions)
       .pipe(  // Tubería
         // tap intersecta la respuesta si no hay error
-        tap((perfil: ClPerfil) => console.log('added product w/:', perfil)),
+        tap((perfil: ClPerfil) => console.log('added perfil w/:', perfil)),
         // En caso de que ocurra Error
-        catchError(this.handleError<ClPerfil>('addProduct'))
+        catchError(this.handleError<ClPerfil>('addPerfil'))
       );
   }
 
@@ -52,10 +52,10 @@ export class PerfilServiceService {
   }
 
 
-  //  Obtener un Producto
+  //  Obtener un Perfil
   getPerfil(id: Number): Observable<ClPerfil> {
     //const url = '${apiUrl}/${id}';
-    //return this.http.get<Producto>(url).pipe(
+    //return this.http.get<Perfil>(url).pipe(
     console.log("getPerfil ID:" + id);
     return this.http.get<ClPerfil>(apiUrl + "/" + id)
       .pipe(
@@ -66,7 +66,7 @@ export class PerfilServiceService {
 
   deletePerfil(id: number): Observable<ClPerfil> {
     //const url = '${apiUrl}/${id}';
-    //return this.http.delete<Producto>(url, httpOptions).pipe(
+    //return this.http.delete<Perfil>(url, httpOptions).pipe(
     return this.http.delete<ClPerfil>(apiUrl + "/" + id, httpOptions)
       .pipe(
         tap(_ => console.log('deleted perfil id=${id}')),

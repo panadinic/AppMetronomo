@@ -7,12 +7,12 @@
 export class ClPerfil {
     // si no Inicializo los valores, da Error
     // Por eso es el constructor por obligación
-    id:Number
-    fechanacimiento:String
+    id: number
+    fechanacimiento: Date
     //Signo pregunta, permite que el campo sea opcional
-    usuario:String
-    correo:String  
-    clave:String
+    usuario: string
+    correo: string  
+    clave: string
   
   
     // si no Inicializo los valores, da Error
