@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirige a la página de login por defecto
   {
@@ -42,6 +45,11 @@ const routes: Routes = [
   },
   { path: 'product-detail/:id', loadChildren: () => import('./producto/product-detail/product-detail.module').then(m => m.ProductDetailPageModule) },
   { path: 'product-edit/:id', loadChildren: () => import('./producto/product-edit/product-edit.module').then(m => m.ProductEditPageModule) },
+  {
+    path: 'perfil-detail/:id',
+    loadChildren: () => import('./perfiles/perfil-detail/perfil-detail.module').then(m => m.PerfilDetailPageModule)
+  },
+  
   // {
   //   path: 'perfil-act',
   //   loadChildren: () => import('./perfiles/perfil-act/perfil-act.module').then( m => m.PerfilActPageModule)
@@ -57,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: 'perfil-read',
-    loadChildren: () => import('./perfiles/perfil-read/perfil-read.module').then( m => m.PerfilReadPageModule)
+    loadChildren: () => import('./perfiles/perfil-detail/perfil-detail.module').then( m => m.PerfilDetailPageModule)
   },
   {
     path: 'perfil-list',
@@ -76,13 +84,16 @@ const routes: Routes = [
     loadChildren: () => import('./perfiles/perfil-delete/perfil-delete.module').then( m => m.PerfilDeletePageModule)
   },
   {
-    path: 'perfil-read',
-    loadChildren: () => import('./perfiles/perfil-read/perfil-read.module').then( m => m.PerfilReadPageModule)
+    path: 'perfil-detail',
+    loadChildren: () => import('./perfiles/perfil-detail/perfil-detail.module').then( m => m.PerfilDetailPageModule)
   },
   {
     path: 'perfil-list',
     loadChildren: () => import('./perfiles/perfil-list/perfil-list.module').then( m => m.PerfilListPageModule)
   },
+  
+ 
+  
 
 
 //   {
