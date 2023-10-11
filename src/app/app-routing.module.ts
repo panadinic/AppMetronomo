@@ -62,7 +62,27 @@ const routes: Routes = [
   {
     path: 'perfil-list',
     loadChildren: () => import('./perfiles/perfil-list/perfil-list.module').then( m => m.PerfilListPageModule)
+  },  {
+    path: 'perfil-act',
+    loadChildren: () => import('./perfiles/perfil-act/perfil-act.module').then( m => m.PerfilActPageModule)
   },
+  {
+    path: 'perfil-add',
+    loadChildren: () => import('./perfiles/perfil-add/perfil-add.module').then( m => m.PerfilAddPageModule)
+  },
+  {
+    path: 'perfil-delete',
+    loadChildren: () => import('./perfiles/perfil-delete/perfil-delete.module').then( m => m.PerfilDeletePageModule)
+  },
+  {
+    path: 'perfil-read',
+    loadChildren: () => import('./perfiles/perfil-read/perfil-read.module').then( m => m.PerfilReadPageModule)
+  },
+  {
+    path: 'perfil-list',
+    loadChildren: () => import('./perfiles/perfil-list/perfil-list.module').then( m => m.PerfilListPageModule)
+  },
+
 
 //   {
 //     path: '**',
