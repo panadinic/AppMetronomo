@@ -59,10 +59,7 @@ const routes: Routes = [
     path: 'perfil-add',
     loadChildren: () => import('./perfiles/perfil-add/perfil-add.module').then( m => m.PerfilAddPageModule)
   },
-  {
-    path: 'perfil-delete',
-    loadChildren: () => import('./perfiles/perfil-delete/perfil-delete.module').then( m => m.PerfilDeletePageModule)
-  },
+ 
   {
     path: 'perfil-read',
     loadChildren: () => import('./perfiles/perfil-detail/perfil-detail.module').then( m => m.PerfilDetailPageModule)
@@ -79,10 +76,7 @@ const routes: Routes = [
     path: 'perfil-add',
     loadChildren: () => import('./perfiles/perfil-add/perfil-add.module').then( m => m.PerfilAddPageModule)
   },
-  {
-    path: 'perfil-delete',
-    loadChildren: () => import('./perfiles/perfil-delete/perfil-delete.module').then( m => m.PerfilDeletePageModule)
-  },
+  
   {
     path: 'perfil-detail',
     loadChildren: () => import('./perfiles/perfil-detail/perfil-detail.module').then( m => m.PerfilDetailPageModule)
@@ -91,6 +85,17 @@ const routes: Routes = [
     path: 'perfil-list',
     loadChildren: () => import('./perfiles/perfil-list/perfil-list.module').then( m => m.PerfilListPageModule)
   },
+  {
+    path: 'perfil-edit',
+    loadChildren: () => import('./perfiles/perfil-edit/perfil-edit.module').then( m => m.PerfilEditPageModule)
+  },
+  { path: 'perfil-edit/:id', loadChildren: () => import('./perfiles/perfil-edit/perfil-edit.module').then(m => m.PerfilEditPageModule) },
+  {
+    path: 'perfil-all',
+    loadChildren: () => import('./perfiles/perfil-all/perfil-all.module').then( m => m.PerfilAllPageModule)
+  },
+
+
   
  
   

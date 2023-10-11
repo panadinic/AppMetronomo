@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PerfilDeletePage } from './perfil-delete.page';
+import { PerfilAllPage } from './perfil-all.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: PerfilDeletePage
+    component: PerfilAllPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PerfilDeletePageRoutingModule {}
+export class PerfilAllPageRoutingModule {}

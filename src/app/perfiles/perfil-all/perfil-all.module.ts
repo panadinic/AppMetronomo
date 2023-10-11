@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PerfilDeletePageRoutingModule } from './perfil-delete-routing.module';
+import { PerfilAllPageRoutingModule } from './perfil-all-routing.module';
 
-import { PerfilDeletePage } from './perfil-delete.page';
+import { PerfilAllPage } from './perfil-all.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PerfilDeletePageRoutingModule
+    PerfilAllPageRoutingModule
   ],
-  declarations: [PerfilDeletePage]
+  declarations: [PerfilAllPage]
 })
-export class PerfilDeletePageModule {}
+export class PerfilAllPageModule {}
