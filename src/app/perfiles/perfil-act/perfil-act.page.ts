@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { PerfilServiceService } from '../perfil.service.service';
 
 @Component({
-  selector: 'app-perfil-act',
-  templateUrl: './perfil-act.page.html',
-  styleUrls: ['./perfil-act.page.scss'],
+    selector: 'app-actualizar',
+    templateUrl: './perfil-act.page.html',
+    //styleUrls: ['./cliente.actualizar.page.scss'],
 })
-export class PerfilActPage implements OnInit {
+export class ClienteActualizarPage {
+    id = "5"
+    registro = {
+        nombres: "",
+        apellidos: "",
+        correo: "",
+        clave: "",
+    }
 
-  constructor() { }
 
-  ngOnInit() {
-  }
+    // Observe que en el constructor injectamos el ClienteService
+    // Le asignamos un nombre el cual utilizaremos más adelante
+    constructor(private cliServ:PerfilServiceService) { }
+
+    grabar() { 
+        // Invocamos al método creado en el servicio
+        // Le pasamos como parámetro el ID y la variable registro
+        // registro, contiene todos los campos enlazados del Html
+        this.cliServ.updatePerfil(this.id ,this.registro)
+    }
+
 
 }
