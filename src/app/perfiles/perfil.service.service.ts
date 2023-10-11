@@ -52,14 +52,15 @@ export class PerfilServiceService {
   }
 
 
-  //  Obtener un Perfil
-  getPerfil(id: Number): Observable<ClPerfil> {
+  //  Obtener un Producto
+  getPerfil(id: number): Observable<ClPerfil> {
+
     //const url = '${apiUrl}/${id}';
     //return this.http.get<Perfil>(url).pipe(
     console.log("getPerfil ID:" + id);
     return this.http.get<ClPerfil>(apiUrl + "/" + id)
       .pipe(
-        tap(_ => console.log('fetched perfils id=${id}')),
+        tap(_ => console.log('fetched perfil id=${id}')),
         catchError(this.handleError<ClPerfil>('getPerfil id=${id}'))
       );
   }
