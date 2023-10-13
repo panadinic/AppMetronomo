@@ -33,27 +33,35 @@ export class PerfilEditPage implements OnInit {
     });
 
     this.perfilForm = this.formBuilder.group({
-      perfil_username: [null, Validators.required],
-      perfil_mail: [null, Validators.required],
-      perfil_password: [null, Validators.required],
-      perfil_fechanacimiento: [null, Validators.required],
+      'perfil_username': [null, Validators.required],
+      'perfil_mail': [null, Validators.required],
+      'perfil_password': [null, Validators.required],
+      'perfil_fechanacimiento': [null, Validators.required],
     });
   }
 
   async onFormSubmit() {
     console.log('onFormSubmit ID:' + this.id);
-    this.perfil.id = this.id;
 
-    await this.restApi.updatePerfil(this.id, this.perfil).subscribe({
-      next: (res) => {
-        let id = res['id'];
-        this.router.navigate(['/perfil-detail/' + this.id]);
-      },
-      complete: () => {},
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    if (this.perfilForm.valid) {
+      this.perfil.id = this.id;
+      this.perfil.usuario = this.perfilForm.value.perfil_username;
+      this.perfil.correo = this.perfilForm.value.perfil_mail;
+      this.perfil.clave = this.perfilForm.value.perfil_password;
+      this.perfil.fechanacimiento = this.perfilForm.value.perfil_fechanacimiento;
+
+      await this.restApi.updatePerfil(this.id, this.perfil).subscribe({
+        next: (res) => {
+          let id = res['id'];
+          // this.router.navigate(['/perfil-detail/' + this.id]);
+          this.router.navigate(['/perfil-list/']); // Cambié la ruta aquí
+        },
+        complete: () => {},
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   async getPerfil(id: number) {
@@ -104,4 +112,5 @@ export class PerfilEditPage implements OnInit {
     await alert.present();
   }
 }
+
 

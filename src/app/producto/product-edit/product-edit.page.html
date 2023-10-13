@@ -1,6 +1,5 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -11,20 +10,19 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content padding>
-  <form [formGroup]="productForm"  (ngSubmit)="onFormSubmit(productForm.value)">
+  <form [formGroup]="productForm" (ngSubmit)="onFormSubmit()">
     <ion-item>
       <ion-label position="floating">Nombre del Producto</ion-label>
-      <ion-input type="text" [(ngModel)]="producto.nombre" formControlName="prod_name"></ion-input>
+      <ion-input type="text" formControlName="prod_name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Precio</ion-label>
-      <ion-input type="number" [(ngModel)]="producto.precio" formControlName="prod_price"></ion-input>
+      <ion-input type="number" formControlName="prod_price"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="producto.descripcion" formControlName="prod_desc"></ion-textarea>
+      <ion-textarea formControlName="prod_desc"></ion-textarea>
     </ion-item>
     
     <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!productForm.valid">Submit</ion-button>

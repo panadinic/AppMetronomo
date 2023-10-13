@@ -26,12 +26,10 @@ export class ProductServiceService {
     };
   }
 
-  // Método Agregar producto, y devuelve un observable del tipo Producto
-  // Debe ser un Observable si deses suscribir este método en otro lado
+
   addProduct(producto: ClProducto): Observable<ClProducto> {
     console.log("Res-api Enviando AddProducto : ", producto);
-    // Ojo No lo ejecuta lo declara
-    // El Pipe lo intercepta
+
     return this.http.post<ClProducto>(apiUrl, producto, httpOptions)
       .pipe(  // Tubería
         // tap intersecta la respuesta si no hay error
@@ -65,8 +63,7 @@ export class ProductServiceService {
   }
 
   deleteProduct(id: number): Observable<ClProducto> {
-    //const url = '${apiUrl}/${id}';
-    //return this.http.delete<Producto>(url, httpOptions).pipe(
+   
     return this.http.delete<ClProducto>(apiUrl + "/" + id, httpOptions)
       .pipe(
         tap(_ => console.log('deleted product id=${id}')),

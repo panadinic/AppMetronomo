@@ -1,0 +1,19 @@
+Git:
+
+git clone https://github.com/SergioFuentesDuoc/IonicApi.git
+
+
+
+Solo , pararse en el directorio y ejecutar:
+
+npm install
+
+ionic serve
+
+
+
+Luego abrir un cmd, y dentro del proyecto existe una carpeta llamada db, ejecutar
+
+npm install -g json-server
+
+json-server --watch dbHarrys.json
