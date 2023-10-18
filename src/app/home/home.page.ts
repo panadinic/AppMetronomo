@@ -3,6 +3,10 @@ import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { PhotoService } from '../services/photo.service';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
+
 
 
 
@@ -36,7 +40,13 @@ export class HomePage {
 
     selectedSound: any = this.soundOptions[0];
 
-    constructor(private platform: Platform, private router: Router, private route: ActivatedRoute, private navCtrl: NavController ){
+    constructor(private platform: Platform, 
+                private router: Router, 
+                private route: ActivatedRoute, 
+                private navCtrl: NavController,
+                public photoService: PhotoService ){
+
+    defineCustomElements(window);             
 
     this.route.params.subscribe(params => {
       this.username = params['username'];
@@ -84,11 +94,7 @@ export class HomePage {
     }
   }
 
-  // onSliderChange(event: any) {
-  //   const newValue = event.detail.value;
-  //   this.sliderValue = newValue;
-  //   // Puedes agregar lógica adicional aquí según sea necesario
-  // }
+
 
   onSliderChange(event: any) {
     const newValue = event.detail.value;
@@ -137,17 +143,6 @@ export class HomePage {
     }
   }
 
-  // playClickSound() {
-  //   console.log('Reproduciendo sonido...'); // Agrega un mensaje de depuración
-  //   if (this.platform.is('cordova')) {
-  //     const clickSound = new Audio('assets/BEAT.mp3'); // Asegúrate de que la ruta sea correcta
-  //     clickSound.volume = this.volume / 100;
-  //     clickSound.play();
-  //   } else {
-  //     this.clickSound.nativeElement.volume = this.volume / 100;
-  //     this.clickSound.nativeElement.play();
-  //   }
-  // }
 
   playClickSound() {
     console.log('Reproduciendo sonido...');
@@ -166,4 +161,14 @@ export class HomePage {
   volver() {
     this.router.navigate(['/login']);
   }
+
+
+
+ 
+
+  addPhotoToGallery() {
+    this.photoService.addNewToGallery();
+  }
+
 }
+
