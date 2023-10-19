@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
+import { Geolocation } from '@capacitor/geolocation';
 
 
 
@@ -169,6 +170,33 @@ export class HomePage {
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
+
+
+
+  async ionViewDidEnter() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      console.log('Current position:', coordinates);
+    } catch (error) {
+      console.error('Error getting current position:', error);
+    }
+  }
+
+
+
+  async requestPermission() {
+    const status = await Geolocation.checkPermissions();
+    if (status.location === 'granted') {
+      // Ya tienes permiso
+    } else if (status.location === 'denied') {
+      // Necesitas solicitar permiso al usuario
+      const permission = await Geolocation.requestPermissions();
+      if (permission.location === 'granted') {
+        // Permiso otorgado
+      }
+    }
+  }
+  
 
 }
 
