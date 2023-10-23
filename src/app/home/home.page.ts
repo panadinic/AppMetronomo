@@ -6,6 +6,7 @@ import { NavController } from '@ionic/angular';
 import { PhotoService } from '../services/photo.service';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { Geolocation } from '@capacitor/geolocation';
+import { MenuController } from '@ionic/angular';
 
 
 
@@ -45,7 +46,8 @@ export class HomePage {
                 private router: Router, 
                 private route: ActivatedRoute, 
                 private navCtrl: NavController,
-                public photoService: PhotoService ){
+                public photoService: PhotoService,
+                private menu: MenuController ){
 
     defineCustomElements(window);             
 
@@ -173,30 +175,27 @@ export class HomePage {
 
 
 
-  async ionViewDidEnter() {
-    try {
-      const coordinates = await Geolocation.getCurrentPosition();
-      console.log('Current position:', coordinates);
-    } catch (error) {
-      console.error('Error getting current position:', error);
-    }
+
+
+
+  camara() {
+    // Lógica para la opción 1
+
+    this.router.navigate(['camara']);
+    this.menu.close('end'); // Cierra el menú
   }
 
+  geolocalizacion() {
+    // Lógica para la opción 2
 
-
-  async requestPermission() {
-    const status = await Geolocation.checkPermissions();
-    if (status.location === 'granted') {
-      // Ya tienes permiso
-    } else if (status.location === 'denied') {
-      // Necesitas solicitar permiso al usuario
-      const permission = await Geolocation.requestPermissions();
-      if (permission.location === 'granted') {
-        // Permiso otorgado
-      }
-    }
+    this.router.navigate(['geo']);
+    this.menu.close('end'); // Cierra el menú
   }
   
+  home(){
+    this.router.navigate(['home']);
+    this.menu.close('end'); // Cierra el menú
+  }
 
 }
 

@@ -94,6 +94,25 @@ const routes: Routes = [
     path: 'perfil-all',
     loadChildren: () => import('./perfiles/perfil-all/perfil-all.module').then( m => m.PerfilAllPageModule)
   },
+  {
+    path: 'camara',
+    loadChildren: () => import('./camara/camara.module').then( m => m.CamaraPageModule)
+  },
+  {
+    path: 'geo',
+    loadChildren: () => import('./geo/geo.module').then( m => m.GeoPageModule)
+  },
+  {
+    path: 'instrumento',
+    loadChildren: () => import('./instrumento/instrumento.module').then( m => m.InstrumentoPageModule)
+  },
+  {
+    path: 'drums',
+    loadChildren: () => import('./drums/drums.module').then( m => m.DrumsPageModule)
+  },
+  
+  
+
 
 
   
