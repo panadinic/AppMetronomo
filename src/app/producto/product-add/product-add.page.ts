@@ -54,7 +54,7 @@ export class ProductAddPage implements OnInit {
     this.productForm = this.formBuilder.group({
       "nombreprod": [null, Validators.required],
       'direccion': [null, Validators.required],
-      'precio': [null, Validators.required],
+      'precio': [null, Validators.required]
     });
   }
   // se ejecutará cuando presione el Submit
