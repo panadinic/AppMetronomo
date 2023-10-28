@@ -15,12 +15,25 @@ import { ProductServiceService } from '../product-service.service';
 export class ProductDetailPage implements OnInit {
   // Creamos registro a utilizar en el Html
   producto: ClProducto = {
-    id: 1511
-    , nombre: 'Harrys el Magnifico'
-    , descripcion: 'El Ingenioso'
-    , precio: 100
-    , fecha: new Date()
-    
+    idProducto: 0,
+    codigo: '09-G6',
+    nombreprod: '',
+    precio: 0,
+    cantidad: 0, // Nueva propiedad
+    fechaNacimiento: '', // Nueva propiedad
+    rut:'',
+    dv: '', // Nueva propiedad
+    enfermedad: '0', // Nueva propiedad
+    fonocontacto: 0, // Nueva propiedad
+    categoria: '0', // Nueva propiedad
+    editorial: '0', // Nueva propiedad
+    raza: '0', // Nueva propiedad
+    edad: 0, // Nueva propiedad
+    altura: 0, // Nueva propiedad
+    hrini: '0', // Nueva propiedad
+    hrfin: '0', // Nueva propiedad
+    direccion: '0', // Nueva propiedad
+    fCreacion: '', // Nueva propiedad
   };
 
   // Injectamos Librerías a utilizar
@@ -38,29 +51,59 @@ export class ProductDetailPage implements OnInit {
   }
 
 // Método que permite leer el producto
+  // async getProduct() {
+  //   console.log("getProduct **************** ParamMap ID:" + this.route.snapshot.paramMap.get('id'));
+  //   // Creamos un Wait
+  //   const loading = await this.loadingController.create({ message: 'Loading...' });
+  //   // Mostramos el Wait
+  //   await loading.present();
+  //   await this.restApi.getProduct(this.route.snapshot.paramMap.get('id')!)
+  //     .subscribe({
+  //       next: (res) => {
+  //         console.log("Data *****************");
+  //         console.log(res);
+  //         // Si funciona la respuesta la pasamos al producto
+  //         this.producto = res;
+  //         loading.dismiss();
+  //       }
+  //       , complete: () => { }
+  //       , error: (err) => {
+  //         //Si no funcion desplegamos en consola el error
+  //         console.log("Error DetailProduct Página", err);
+  //         loading.dismiss(); //Elimina la espera
+  //       }
+  //     })
+  // }
+
+
   async getProduct() {
     console.log("getProduct **************** ParamMap ID:" + this.route.snapshot.paramMap.get('id'));
-    // Creamos un Wait
+    const productId = Number(this.route.snapshot.paramMap.get('idProducto')); // Convertir a número
+    if (isNaN(productId)) {
+      // Manejar el caso en el que 'id' no sea un número válido
+      console.error('ID no es un número válido');
+      return;
+    }
+  
     const loading = await this.loadingController.create({ message: 'Loading...' });
-    // Mostramos el Wait
     await loading.present();
-    await this.restApi.getProduct(this.route.snapshot.paramMap.get('id')!)
+    
+    await this.restApi.getProduct(productId)
       .subscribe({
         next: (res) => {
           console.log("Data *****************");
           console.log(res);
-          // Si funciona la respuesta la pasamos al producto
           this.producto = res;
           loading.dismiss();
-        }
-        , complete: () => { }
-        , error: (err) => {
-          //Si no funcion desplegamos en consola el error
+        },
+        complete: () => { },
+        error: (err) => {
           console.log("Error DetailProduct Página", err);
-          loading.dismiss(); //Elimina la espera
+          loading.dismiss();
         }
-      })
+      });
   }
+  
 
   // El Html invoca el método delete
   async delete(id: number) {

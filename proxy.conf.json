@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "http://sumativa2.onrender.com/api/productos/",
+      "secure": false
+    }
+  }
+
+

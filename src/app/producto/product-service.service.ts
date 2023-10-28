@@ -1,83 +1,64 @@
 import { Injectable } from '@angular/core';
 import { ClProducto } from './model/ClProducto';
-import { HttpClientModule } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
-
-// Importamos  las librerías necesarias
-// creamos Constantes que utilizaremos en el envio
-const apiUrl = "http://localhost:3000/productos";
+const apiUrl = "https://sumativa2.onrender.com/api/productos/";
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductServiceService {
-  // Injectamos HttpClient, para poder consular una página
   constructor(private http: HttpClient) { }
 
-  // Controla y enviará un mensaje a consola para todos los errores
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error("handleError Harrys", error); // log to console instead
+      console.error("handleError Harrys", error);
       return of(result as T);
     };
   }
 
-
   addProduct(producto: ClProducto): Observable<ClProducto> {
-    console.log("Res-api Enviando AddProducto : ", producto);
-
     return this.http.post<ClProducto>(apiUrl, producto, httpOptions)
-      .pipe(  // Tubería
-        // tap intersecta la respuesta si no hay error
+      .pipe(
         tap((producto: ClProducto) => console.log('added product w/:', producto)),
-        // En caso de que ocurra Error
         catchError(this.handleError<ClProducto>('addProduct'))
       );
   }
 
-  // Obtenemos todos los Productos
   getProducts(): Observable<ClProducto[]> {
-    console.log("getProducts ()");
     return this.http.get<ClProducto[]>(apiUrl)
       .pipe(
-        tap(heroes => console.log('fetched products')),
+        tap(products => console.log('fetched products')),
         catchError(this.handleError('getProducts', []))
       );
   }
 
-
-  //  Obtener un Producto
-  getProduct(id: String): Observable<ClProducto> {
-    //const url = '${apiUrl}/${id}';
-    //return this.http.get<Producto>(url).pipe(
-    console.log("getProduct ID:" + id);
-    return this.http.get<ClProducto>(apiUrl + "/" + id)
+  getProduct(idProducto: number): Observable<ClProducto> {
+    return this.http.get<ClProducto>(apiUrl + "/" + idProducto) // Cambio aquí
       .pipe(
-        tap(_ => console.log('fetched product id=${id}')),
-        catchError(this.handleError<ClProducto>('getProduct id=${id}'))
+        tap(_ => console.log('fetched product id=${idProducto}')), // Cambio aquí
+        catchError(this.handleError<ClProducto>('getProduct id=${idProducto}')) // Cambio aquí
       );
   }
 
-  deleteProduct(id: number): Observable<ClProducto> {
-   
-    return this.http.delete<ClProducto>(apiUrl + "/" + id, httpOptions)
+  deleteProduct(idProducto: number): Observable<ClProducto> {
+    return this.http.delete<ClProducto>(apiUrl + "/" + idProducto, httpOptions) // Cambio aquí
       .pipe(
-        tap(_ => console.log('deleted product id=${id}')),
+        tap(_ => console.log('deleted product id=${idProducto}')), // Cambio aquí
         catchError(this.handleError<ClProducto>('deleteProduct'))
       );
   }
 
-  updateProduct(id: number, producto: ClProducto): Observable<ClProducto> {
-    return this.http.put<ClProducto>(apiUrl + "/" + id, producto, httpOptions)
+  updateProduct(idProducto: number, producto: ClProducto): Observable<ClProducto> {
+    return this.http.put<ClProducto>(apiUrl + "/" + idProducto, producto, httpOptions) // Cambio aquí
       .pipe(
-        tap(_ => console.log('updated product id=${id}')),
+        tap(_ => console.log('updated product id=${idProducto}')), // Cambio aquí
         catchError(this.handleError<any>('updateProduct'))
       );
   }
-
-
 }
+

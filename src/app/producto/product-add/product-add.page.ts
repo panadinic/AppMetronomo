@@ -17,12 +17,25 @@ export class ProductAddPage implements OnInit {
   productForm!: FormGroup;
   // Generalmente se usa una interface, sin embargo para jugar utilizaremos  una clase
   producto: ClProducto = {
-    id: 0
-    , nombre: ''
-    , descripcion: ''
-    , precio: 0
-    , fecha: new Date()
-    
+    idProducto: 0,
+    codigo: '09-G6',
+    nombreprod: '',
+    precio: 0,
+    cantidad: 0, // Nueva propiedad
+    fechaNacimiento: '', // Nueva propiedad
+    rut:'0',
+    dv: '0', // Nueva propiedad
+    enfermedad: '0', // Nueva propiedad
+    fonocontacto: 0, // Nueva propiedad
+    categoria: '0', // Nueva propiedad
+    editorial: '0', // Nueva propiedad
+    raza: '0', // Nueva propiedad
+    edad: 0, // Nueva propiedad
+    altura: 0, // Nueva propiedad
+    hrini: '0', // Nueva propiedad
+    hrfin: '0', // Nueva propiedad
+    direccion: '', // Nueva propiedad
+    fCreacion: '', // Nueva propiedad
   };
 
   // Injectamos FormBuilder, el cual nos permitirá realizar validaciones                         
@@ -42,7 +55,6 @@ export class ProductAddPage implements OnInit {
       "prod_name": [null, Validators.required],
       'prod_desc': [null, Validators.required],
       'prod_price': [null, Validators.required],
-      // 'prod_cantidad': [null, Validators.required]
     });
   }
   // se ejecutará cuando presione el Submit
@@ -50,11 +62,19 @@ export class ProductAddPage implements OnInit {
     console.log("onFormSubmit del Product ADD")
 
     // Creamos un Loading Controller, Ojo no lo muestra
+    console.log("Contenido de this.producto:", this.producto);
+
+
     const loading = await this.loadingController.create({
       message: 'Loading...'
     });
     // Muestra el Loading Controller
     await loading.present();
+
+
+
+    // Antes de realizar la solicitud
+console.log("Datos que se van a enviar:", this.producto);
 
     // Ejecuta el método del servicio y los suscribe
     await this.restApi.addProduct(this.producto)

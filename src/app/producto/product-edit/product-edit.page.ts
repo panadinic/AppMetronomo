@@ -12,7 +12,27 @@ import { ProductServiceService } from '../product-service.service';
 })
 export class ProductEditPage implements OnInit {
   productForm!: FormGroup;
-  producto: ClProducto = { id: 1, nombre: '', descripcion: '', precio: 0, fecha: new Date() };
+  producto: ClProducto = {
+    idProducto: 0,
+    codigo: '09-G6',
+    nombreprod: '',
+    precio: 0,
+    cantidad: 0, // Nueva propiedad
+    fechaNacimiento: '', // Nueva propiedad
+    rut: '',
+    dv: '0', // Nueva propiedad
+    enfermedad: '0', // Nueva propiedad
+    fonocontacto: 0, // Nueva propiedad
+    categoria: '0', // Nueva propiedad
+    editorial: '0', // Nueva propiedad
+    raza: '0', // Nueva propiedad
+    edad: 0, // Nueva propiedad
+    altura: 0, // Nueva propiedad
+    hrini: '0', // Nueva propiedad
+    hrfin: '0', // Nueva propiedad
+    direccion: '', // Nueva propiedad
+    fCreacion: '', // Nueva propiedad
+  };
   id: any = '';
 
   constructor(
@@ -38,19 +58,20 @@ export class ProductEditPage implements OnInit {
     console.log("onFormSubmit ID:" + this.id);
 
     if (this.productForm.valid) {
-      this.producto.id = this.id;
-      this.producto.nombre = this.productForm.value.prod_name;
-      this.producto.descripcion = this.productForm.value.prod_desc;
+      this.producto.idProducto = this.id;
+      this.producto.nombreprod = this.productForm.value.prod_name;
+      this.producto.direccion = this.productForm.value.prod_desc;
       this.producto.precio = this.productForm.value.prod_price;
 
       await this.restApi.updateProduct(this.id, this.producto).subscribe({
         next: (res) => {
-          let id = res['id'];
+          let id = res['idProducto'];
           this.presentAlertConfirm('Producto actualizado exitosamente.');
         },
         complete: () => {},
         error: (err) => {
           console.log(err);
+          this.presentAlertConfirm('Error al actualizar el producto.');
         },
       });
     }
@@ -61,30 +82,39 @@ export class ProductEditPage implements OnInit {
       message: 'Loading...'
     });
 
-    await loading.present();
+    try {
+      await loading.present();
 
-    await this.restApi.getProduct(id + '').subscribe({
-      next: (data) => {
-        console.log("getProductID data****");
-        console.log(data);
+      this.restApi.getProduct(id).subscribe({
+        next: (data) => {
+          console.log("getProductID data****");
+          console.log(data);
 
-        this.id = data.id;
+          if (data && data.idProducto) {
+            this.id = data.idProducto;
+          }
 
-        this.productForm.setValue({
-          prod_name: data.nombre,
-          prod_desc: data.descripcion,
-          prod_price: data.precio
-        });
+          this.productForm.setValue({
+            prod_name: data.nombreprod || '', // Use empty string as a fallback
+            prod_desc: data.direccion || '', // Use empty string as a fallback
+            prod_price: data.precio || 0, // Use 0 as a fallback for numeric values
+          });
 
-        loading.dismiss();
-      },
-      complete: () => {},
-      error: (err) => {
-        console.log("getProductID Errr****+");
-        console.log(err);
-        loading.dismiss();
-      },
-    });
+          loading.dismiss();
+        },
+        error: (err) => {
+          console.log("getProductID Error****");
+          console.log(err);
+          this.presentAlertConfirm('Error al cargar el producto.');
+          loading.dismiss();
+        },
+      });
+    } catch (error) {
+      console.log("getProductID Error****");
+      console.log(error);
+      this.presentAlertConfirm('Error al cargar el producto.');
+      loading.dismiss();
+    }
   }
 
   async presentAlertConfirm(msg: string) {
@@ -103,4 +133,5 @@ export class ProductEditPage implements OnInit {
     await alert.present();
   }
 }
+
 

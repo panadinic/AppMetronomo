@@ -11,7 +11,27 @@ export class ProductAllPage implements OnInit {
   buttonLeerDisabled = false
   buttonActualizarDisabled = false
   buttonCrearDisabled = false
-  producto: ClProducto = { id: 1, nombre: '', descripcion: '', precio: 0, fecha: new Date() };;
+  producto: ClProducto = {
+    idProducto: 0,
+    codigo: '09-G6',
+    nombreprod: '',
+    precio: 0,
+    cantidad: 0, // Nueva propiedad
+    fechaNacimiento: '', // Nueva propiedad
+    rut:'',
+    dv: '', // Nueva propiedad
+    enfermedad: '0', // Nueva propiedad
+    fonocontacto: 0, // Nueva propiedad
+    categoria: '0', // Nueva propiedad
+    editorial: '0', // Nueva propiedad
+    raza: '0', // Nueva propiedad
+    edad: 0, // Nueva propiedad
+    altura: 0, // Nueva propiedad
+    hrini: '0', // Nueva propiedad
+    hrfin: '0', // Nueva propiedad
+    direccion: '0', // Nueva propiedad
+    fCreacion: '', // Nueva propiedad
+  };;
 
   constructor() { }
   ngOnInit() {  }
