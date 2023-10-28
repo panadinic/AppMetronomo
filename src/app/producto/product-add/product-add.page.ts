@@ -52,9 +52,9 @@ export class ProductAddPage implements OnInit {
   ngOnInit() {
     // Especificamos que todos los campos son obligatorios
     this.productForm = this.formBuilder.group({
-      "prod_name": [null, Validators.required],
-      'prod_desc': [null, Validators.required],
-      'prod_price': [null, Validators.required],
+      "nombreprod": [null, Validators.required],
+      'direccion': [null, Validators.required],
+      'precio': [null, Validators.required],
     });
   }
   // se ejecutará cuando presione el Submit

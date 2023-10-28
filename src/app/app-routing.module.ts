@@ -43,7 +43,7 @@ const routes: Routes = [
     path: 'product-list',
     loadChildren: () => import('./producto/product-list/product-list.module').then( m => m.ProductListPageModule)
   },
-  { path: 'product-detail/:id', loadChildren: () => import('./producto/product-detail/product-detail.module').then(m => m.ProductDetailPageModule) },
+  { path: 'product-detail/:idProducto', loadChildren: () => import('./producto/product-detail/product-detail.module').then(m => m.ProductDetailPageModule) },
   { path: 'product-edit/:id', loadChildren: () => import('./producto/product-edit/product-edit.module').then(m => m.ProductEditPageModule) },
   {
     path: 'perfil-detail/:id',
