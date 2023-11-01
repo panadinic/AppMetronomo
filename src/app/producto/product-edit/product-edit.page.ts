@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
+=======
+  import { Component, OnInit } from '@angular/core';
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
   import { LoadingController, AlertController } from '@ionic/angular';
   import { ActivatedRoute, Router } from '@angular/router';
   import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -107,7 +111,11 @@ async getProduct(id: number) {
 
     this.restApi.getProduct(id).subscribe({
       next: (data) => {
+<<<<<<< HEAD
         console.log("getProductID data**");
+=======
+        console.log("getProductID data****");
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
         console.log(data);
 
         if (data) {
@@ -130,14 +138,22 @@ async getProduct(id: number) {
         loading.dismiss();
       },
       error: (err) => {
+<<<<<<< HEAD
         console.log("getProductID Error**");
+=======
+        console.log("getProductID Error****");
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
         console.log(err);
         this.presentAlertConfirm('Error al cargar el producto.');
         loading.dismiss();
       },
     });
   } catch (error) {
+<<<<<<< HEAD
     console.log("getProductID Error**");
+=======
+    console.log("getProductID Error****");
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
     console.log(error);
     this.presentAlertConfirm('Error al cargar el producto.');
     loading.dismiss();
@@ -159,4 +175,8 @@ async getProduct(id: number) {
       });
       await alert.present();
     }
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c

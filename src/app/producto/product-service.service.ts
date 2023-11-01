@@ -23,11 +23,16 @@ export class ProductServiceService {
 
   addProduct(producto: ClProducto): Observable<ClProducto> {
     return this.http.post<ClProducto>(apiUrl +"/", producto, httpOptions)
+<<<<<<< HEAD
       .pipe(
+=======
+       .pipe(
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
         tap((producto: ClProducto) => console.log('added product w/:', producto)),
         catchError(this.handleError<ClProducto>('addProduct'))
       );
   }
+  
 
   getProducts(): Observable<ClProducto[]> {
     return this.http.get<ClProducto[]>(apiUrl)
@@ -38,18 +43,30 @@ export class ProductServiceService {
   }
 
   getProduct(idProducto: number): Observable<ClProducto> {
+<<<<<<< HEAD
     return this.http.get<ClProducto>(apiUrl  +"/"+ idProducto)
       .pipe(
         tap(_ => console.log(`fetched product id=${idProducto}`)), // Usar comillas invertidas (`) en lugar de comillas simples (')
         catchError(this.handleError<ClProducto>(`getProduct id=${idProducto}`)) // Usar comillas invertidas (`)
+=======
+    return this.http.get<ClProducto>(apiUrl + "/" + idProducto)
+      .pipe(
+        tap(_ => console.log(`fetched product id=${idProducto}`)),
+        catchError(this.handleError<ClProducto>(`getProduct id=${idProducto}`))
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
       );
   }
   
   deleteProduct(idProducto: number): Observable<ClProducto> {
     return this.http.delete<ClProducto>(apiUrl + "/" + idProducto, httpOptions)
       .pipe(
+<<<<<<< HEAD
         tap(_ => console.log(`deleted product id=${idProducto}`)), // Usar comillas invertidas (`)
         catchError(this.handleError<ClProducto>(`deleteProduct`)) // Cambiar el error handler
+=======
+        tap(_ => console.log(`deleted product id=${idProducto}`)),
+        catchError(this.handleError<ClProducto>('deleteProduct'))
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c
       );
   }
   
@@ -69,9 +86,12 @@ export class ProductServiceService {
       );
   }
 }
+<<<<<<< HEAD
  
   
 
 
 
 
+=======
+>>>>>>> a3ac35bd7b5795ee5a8051da5ff27b218e1ed97c

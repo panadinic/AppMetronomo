@@ -10,7 +10,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <ion-card>
     <ion-card-header>
@@ -19,14 +18,18 @@
 
     <ion-card-content>
       <ion-item>
-        <p>Precio : </p>
-        <p>{{producto.precio | currency}}</p>
+        <ion-label>Nombre</ion-label>
+        <ion-text>{{producto.nombreprod}}</ion-text>
       </ion-item>
       <ion-item>
-        <p>Descripción : </p>
-        <p>{{producto.direccion}}</p>
+        <ion-label>Precio</ion-label>
+        <ion-text>{{producto.precio | currency}}</ion-text>
       </ion-item>
-      
+      <ion-item>
+        <ion-label>Descripcion</ion-label>
+        <ion-text>{{producto.direccion}}</ion-text>
+      </ion-item>
+
       <ion-button type="button" shape="round" color="primary" expand="block" href="/product-edit/{{producto.idProducto}}">Editar</ion-button>
       <ion-button type="button" shape="round" color="danger" expand="block" (click)="delete(producto.idProducto)">Eliminar</ion-button>
     </ion-card-content>

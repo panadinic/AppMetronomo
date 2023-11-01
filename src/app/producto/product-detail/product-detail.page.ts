@@ -32,7 +32,7 @@ export class ProductDetailPage implements OnInit {
     altura: 0, // Nueva propiedad
     hrini: '0', // Nueva propiedad
     hrfin: '0', // Nueva propiedad
-    direccion: '0', // Nueva propiedad
+    direccion: '', // Nueva propiedad
     fCreacion: '', // Nueva propiedad
   };
 
