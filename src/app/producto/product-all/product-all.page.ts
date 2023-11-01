@@ -13,7 +13,7 @@ export class ProductAllPage implements OnInit {
   buttonCrearDisabled = false
   producto: ClProducto = {
     idProducto: 0,
-    codigo: '09-G6',
+    codigo: '09-G06',
     nombreprod: '',
     precio: 0,
     cantidad: 0, // Nueva propiedad
