@@ -34,7 +34,8 @@ export class ProductListPage implements OnInit {
 
     await this.restApi.getProducts().subscribe({
       next: (res) => {
-        this.productos = res;
+        // Filtrar los productos por código '09-G06'
+        this.productos = res.filter((producto) => producto.codigo === '09-G06');
         loading.dismiss();
       },
       complete: () => {},
