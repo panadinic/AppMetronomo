@@ -13,6 +13,9 @@
       <ion-label position="stacked">Correo Electrónico</ion-label>
       <ion-input type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
+    <div *ngIf="emailErrorL" class="error-message">
+      {{ emailErrorL }}
+    </div>
 
     <ion-button expand="full" (click)="enviarCorreo()">Enviar Correo</ion-button>
   </div>
