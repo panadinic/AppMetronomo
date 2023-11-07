@@ -7,8 +7,7 @@ import { PhotoService } from '../services/photo.service';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { Geolocation } from '@capacitor/geolocation';
 import { MenuController } from '@ionic/angular';
-
-
+import { ProductListPage } from '../producto/product-list/product-list.page';
 
 
 
@@ -174,10 +173,6 @@ export class HomePage {
   }
 
 
-
-
-
-
   camara() {
     // Lógica para la opción 1
 
@@ -187,15 +182,18 @@ export class HomePage {
 
   geolocalizacion() {
     // Lógica para la opción 2
-
+  
     this.router.navigate(['geo']);
     this.menu.close('end'); // Cierra el menú
   }
   
-  home(){
+  home() {
     this.router.navigate(['home']);
     this.menu.close('end'); // Cierra el menú
   }
-
+  
+  productList() {
+    this.router.navigate(['product-list']);
+    this.menu.close('end'); // Cierra el menú
+  }
 }
-
