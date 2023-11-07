@@ -1,56 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Registrarse</ion-title>
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button> 
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>REGISTRO</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> 
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Registrarse</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <!-- Formulario de registro -->
+ 
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Registro</ion-card-title>
+    <ion-card-header class="ion-text-center">
+      <ion-card-title>Registrate</ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
-      <!-- Campo de usuario -->
-      <ion-item>
-        <ion-label position="floating">Usuario</ion-label>
-        <ion-input type="text" [(ngModel)]="usuario"></ion-input>
-      </ion-item>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input [(ngModel)]="usuario" name="usuario" required></ion-input>
+        </ion-item> 
+        <div *ngIf="usuarioError" class="error-message">
+          {{ usuarioError }} 
+        </div>
+     
 
-      <!-- Campo de correo electrónico -->
-      <ion-item>
-        <ion-label position="floating">Correo Electrónico</ion-label>
-        <ion-input type="email" [(ngModel)]="correo"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input [(ngModel)]="email" name="email" type="email" required></ion-input>
+        </ion-item>
+        <div *ngIf="emailError" class="error-message">
+          {{ emailError }}
+        </div>
 
-      <!-- Campo de fecha de nacimiento -->
-      <!-- Campo de fecha de nacimiento -->
-<ion-item>
-  <ion-label position="floating">Fecha de Nacimiento</ion-label>
-  <ion-input type="date" [(ngModel)]="fechaNacimiento"></ion-input>
-</ion-item>
+        <ion-item>
+          <ion-label position="floating">fecha de Nacimiento</ion-label>
+          <ion-input type="date" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" required></ion-input>
+        </ion-item>
+        <div *ngIf="fechaError" class="error-message">
+          {{ fechaError }}
+        </div>
+        <ion-item>
+          <ion-label position="floating">contraseña</ion-label>
+          <ion-input [(ngModel)]="contrasena" name="clave" type="password"  [type]="mostrarContrasena ? 'text' : 'password'" required></ion-input>
+          <ion-icon position="floating" class="eye-icon" name="eye" slot="end" (click)="toggleMostrarClave()"></ion-icon>
+        </ion-item>
+        <div *ngIf="error" class="error-message">
+          {{ contrasenaError }}
+        </div>
+        <ion-item>
+          <ion-label position="floating">Repetir Clave</ion-label>
+          <ion-input [(ngModel)]="recontrasena" name="repetirClave" type="password" [type]="recontrasena ? 'text' : 'password'" required></ion-input>
+        </ion-item>
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+      </ion-list>
+    
+      <ion-button expand="full" size="small" class="custom-button" (click)="enviarRegistro()">Enviar Registro</ion-button>
 
+      
+    </ion-card-content> 
+    
+  </ion-card> 
 
-
-      <!-- Campo de contraseña -->
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="contrasena"></ion-input>
-      </ion-item>
-      <!-- Campo de recontraseña -->
-      <ion-item>
-        <ion-label position="floating">Recontraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="recontrasena"></ion-input>
-      </ion-item>
-
-      <!-- Botón de enviar -->
-      <ion-button expand="full" (click)="enviarRegistro()">Enviar</ion-button>
-    </ion-card-content>
-  </ion-card>
 </ion-content>
