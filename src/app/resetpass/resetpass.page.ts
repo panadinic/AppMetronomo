@@ -9,17 +9,21 @@ import { Router } from '@angular/router';
 })
 export class ResetpassPage {
   email: string = '';
+  emailErrorL: string = '';
 
   constructor(private navCtrl: NavController, private toastCtrl: ToastController, private router: Router) {}
 
   enviarCorreo() {
     if (!this.isValidEmail(this.email)) {
-      this.mostrarToast('Por favor, ingresa una dirección de correo electrónico válida.');
-      return; 
+      this.emailErrorL = 'Por favor, ingresa una dirección de correo electrónico válida.';
+    } else {
+      // Realizar la lógica para enviar el correo de recuperación de contraseña aquí
+      this.emailErrorL = ''; // Limpiar el mensaje de error
+      this.mostrarToast('Se ha enviado un enlace de restablecimiento de contraseña a tu correo electrónico.');
+      this.router.navigate(['/login']);
     }
-    this.mostrarToast('Se ha enviado un enlace de restablecimiento de contraseña a tu correo electrónico.');
-    this.router.navigate(['/login']);
   }
+  
 
   async mostrarToast(message: string) {
     const toast = await this.toastCtrl.create({
