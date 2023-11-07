@@ -24,14 +24,22 @@ export class RegisterPage {
   constructor(private navCtrl: NavController, private toastController: ToastController) {}
 
   async enviarRegistro() {
+    // Limpiar mensajes de error al inicio
+    this.usuarioError = '';
+    this.fechaError = '';
+    this.emailError = '';
+    this.contrasenaError = '';
+    this.error = '';
+  
     // Validación del usuario
     if (!this.usuario) {
       this.usuarioError = 'El usuario es obligatorio.';
     } else if (!/^[a-zA-Z]+$/.test(this.usuario)) {
       this.usuarioError = 'El usuario debe contener solo letras.';
-    } else {
+        } else {
       this.usuarioError = '';
-    }
+  }
+
   
     // Validación de fecha de nacimiento
     if (!this.fechaNacimiento) {
@@ -40,7 +48,10 @@ export class RegisterPage {
       this.fechaError = 'La fecha de nacimiento debe tener el formato YYYY-MM-DD.';
     } else {
       this.fechaError = '';
+      
     }
+    
+
   
     // Validación del email
     if (!this.email) {
@@ -51,40 +62,43 @@ export class RegisterPage {
       this.emailError = '';
     }
   
+  
+  
     // Validación de la contraseña
-    if (!this.contrasena) {
-      this.contrasenaError = 'La contraseña es obligatoria.';
-    } else if (this.contrasena.length < 8) {
-      this.contrasenaError = 'La contraseña debe tener al menos 8 caracteres.';
-    } else if (!/[A-Z]/.test(this.contrasena)){
-      this.contrasenaError = 'La contraseña debe contener al menos una letra mayúscula.';
-    } else if(!/[0-9]/.test(this.contrasena)){
-      this.contrasenaError = 'La contraseña debe contener al menos un número.';
-    } else if(!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(this.contrasena)){
-      this.contrasenaError = 'La contraseña debe contener al menos un carácter especial.';
-    } else {
-      this.contrasenaError = '';
-    }
+  if (!this.contrasena) {
+    this.contrasenaError = 'La contraseña es obligatoria.';
+  } else if (this.contrasena.length < 8) {
+    this.contrasenaError = 'La contraseña debe tener al menos 8 caracteres.';
+  } else if (!/[A-Z]/.test(this.contrasena)){
+    this.contrasenaError = 'La contraseña debe contener al menos una letra mayúscula.';
+  } else if(!/[0-9]/.test(this.contrasena)){
+    this.contrasenaError = 'La contraseña debe contener al menos un número.';
+  } else if(!/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(this.contrasena)){
+    this.contrasenaError = 'La contraseña debe contener al menos un carácter especial.';
+  } else {
+    this.contrasenaError = '';
+  }
+  
   
     if (!this.usuario || !this.fechaNacimiento || !this.email || !this.contrasena || !this.recontrasena) {
       this.error = 'Todos los campos son obligatorios.';
     } else if (this.contrasena !== this.recontrasena) {
       this.error = 'Las contraseñas no coinciden.';
-    } else {
+    } else {  
       // Realizar el proceso de registro aquí 
       this.error = ''; // Limpiar el mensaje de error
       // Redirigir a la página de éxito o hacer lo que sea necesario
       const toast = await this.toastController.create({
         message: 'Registro exitoso',
-        duration: 2000, // Duración en milisegundos del mensaje
-        color: 'success', // Cambia el color a tu preferencia
+        duration: 2000,
+        color: 'success',
       });
       toast.present();
     }
   
     if (!this.usuarioError && !this.emailError && !this.contrasenaError && !this.error) {
       // Si no hay errores en ningún campo, redirigir a otra página
-      this.navCtrl.navigateForward('/login'); // Cambia 'login' por la ruta de la página deseada
+      this.navCtrl.navigateForward('/login');
     }
   }
 
@@ -94,9 +108,33 @@ export class RegisterPage {
     return emailPattern.test(email);
   }
 
-  toggleMostrarClave() {
-    this.mostrarContrasena = !this.mostrarContrasena;
-  }
+ // Limpiar el mensaje de error del usuario cuando se cambia el valor del campo
+ onUsuarioChange() {
+  this.usuarioError = '';
+}
+
+// Limpiar el mensaje de error de la fecha de nacimiento cuando se cambia el valor del campo
+onFechaNacimientoChange() {
+  this.fechaError = '';
+}
+
+// Limpiar el mensaje de error del email cuando se cambia el valor del campo
+onEmailChange() {
+  this.emailError = '';
+}
+
+// Limpiar el mensaje de error de la contraseña cuando se cambia el valor del campo
+onContrasenaChange() {
+  this.contrasenaError = '';
+}
+
+toggleMostrarClave() {
+  this.mostrarContrasena = !this.mostrarContrasena;
+}
+onRepetirClaveChange() {
+  this.error = '';
+}
+
 
   ngOnInit() {
   }
