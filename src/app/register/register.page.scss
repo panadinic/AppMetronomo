@@ -9,4 +9,21 @@
 
 
 
-
+ .eye-icon {
+    cursor: pointer;
+    margin-top: 35px; /* Ajusta este valor según tu diseño */
+    margin-right: 0px;
+    color: #666;
+  }
+  
+  
+  .custom-button {
+    background-color: blue; // Cambia el color de fondo a azul
+    color: white; // Cambia el color del texto a blanco
+  }
+  
+  .custom-button:hover {
+    background-color: darkblue; // Cambia el color de fondo al pasar el ratón sobre el botón
+  }
+  
+  
