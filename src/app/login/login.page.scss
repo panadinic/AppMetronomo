@@ -79,3 +79,11 @@ ion-card {
   background: transparent; /* Establece un fondo transparente o el color que desees */
   box-shadow: none; /* Elimina la sombra predeterminada si no la deseas */
 }
+
+.error-message {
+  color: red;
+  font-size: 10px;
+  margin-left: 15px;
+  margin-top: 2px; /* Ajusta este valor según tu diseño */
+  text-align: left; /* Opcional: ajusta la alineación del texto según tu diseño */
+}

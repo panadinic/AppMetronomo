@@ -9,9 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  errorMessages: string[] = [];
   username: string = '';
   password: string = '';
+  usernameErrorL: string = '';
 
+  passwordErrorL: string = '';
   constructor(
     private navCtrl: NavController,
     private router: Router,
@@ -20,21 +23,46 @@ export class LoginPage {
 
 
 
+  // login() {
+  //   // Expresión regular para validar la contraseña
+  //   const passwordPattern = /^(?=.*\d{4})(?=.*[a-zA-Z]{3})(?=.*[A-Z]).{8,}$/;
+
+  //   if (this.username.length >= 3 && this.username.length <= 8) {
+  //     if (passwordPattern.test(this.password)) {
+
+  //       this.router.navigate(['/home', { username: this.username }]);
+  //     } else {
+  //       this.showToast('La contraseña debe cumplir con los requisitos.');
+  //     }
+  //   } else {
+  //     this.showToast('El nombre de usuario debe tener entre 3 y 8 caracteres.');
+  //   }
+  // }
+
   login() {
-    // Expresión regular para validar la contraseña
     const passwordPattern = /^(?=.*\d{4})(?=.*[a-zA-Z]{3})(?=.*[A-Z]).{8,}$/;
-
-    if (this.username.length >= 3 && this.username.length <= 8) {
-      if (passwordPattern.test(this.password)) {
-
-        this.router.navigate(['/home', { username: this.username }]);
-      } else {
-        this.showToast('La contraseña debe cumplir con los requisitos.');
-      }
+    const usernamePattern = /^[a-zA-Z]+$/; // Expresión regular que solo permite letras
+  
+    if (this.username.length < 3 || this.username.length > 8) {
+      this.usernameErrorL = 'El nombre de usuario debe tener entre 3 y 8 caracteres.';
+    } else if (!usernamePattern.test(this.username)) {
+      this.usernameErrorL = 'El nombre de usuario solo puede contener letras.';
     } else {
-      this.showToast('El nombre de usuario debe tener entre 3 y 8 caracteres.');
+      this.usernameErrorL = '';
+    }
+  
+    if (!passwordPattern.test(this.password)) {
+      this.passwordErrorL = 'La contraseña debe cumplir con los requisitos.';
+    } else {
+      this.passwordErrorL = '';
+    }
+  
+    if (!this.usernameErrorL && !this.passwordErrorL) {
+      this.router.navigate(['/home', { username: this.username }]);
     }
   }
+  
+  
 
 
   async showToast(message: string) {
