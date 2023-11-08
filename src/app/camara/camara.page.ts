@@ -3,6 +3,8 @@ import { PhotoService } from '../services/photo.service';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { ProductListPage } from '../producto/product-list/product-list.page';
+
 
 @Component({
   selector: 'app-camara',
@@ -47,6 +49,9 @@ export class CamaraPage implements OnInit {
     this.menu.close('end'); // Cierra el menú
   }
 
-
-
+  productList() {
+    this.router.navigate(['product-list']);
+    this.menu.close('end'); // Cierra el menú
+  }
 }
+
