@@ -53,13 +53,7 @@ export class ProductServiceService {
       );
   }
   
-  // updateProduct(idProducto: number, producto: ClProducto): Observable<ClProducto> {
-  //   return this.http.put<ClProducto>(apiUrl + "/"+ idProducto, producto, httpOptions)
-  //     .pipe(
-  //       tap(_ => console.log(`updated product id=${idProducto}`)), // Usar comillas invertidas (`)
-  //       catchError(this.handleError<ClProducto>(`updateProduct`)) // Cambiar el error handler
-  //     );
-  // }
+
 
   updateProduct(idProducto: number, producto: ClProducto): Observable<ClProducto> {
     return this.http.put<ClProducto>(apiUrl + "/" + idProducto, producto, httpOptions)

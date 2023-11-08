@@ -49,12 +49,6 @@ const routes: Routes = [
     path: 'perfil-detail/:id',
     loadChildren: () => import('./perfiles/perfil-detail/perfil-detail.module').then(m => m.PerfilDetailPageModule)
   },
-  
-  // {
-  //   path: 'perfil-act',
-  //   loadChildren: () => import('./perfiles/perfil-act/perfil-act.module').then( m => m.PerfilActPageModule)
-
-  // },
   {
     path: 'perfil-add',
     loadChildren: () => import('./perfiles/perfil-add/perfil-add.module').then( m => m.PerfilAddPageModule)
@@ -68,10 +62,6 @@ const routes: Routes = [
     path: 'perfil-list',
     loadChildren: () => import('./perfiles/perfil-list/perfil-list.module').then( m => m.PerfilListPageModule)
   },
-  // {
-  //   path: 'perfil-act',
-  //   loadChildren: () => import('./perfiles/perfil-act/perfil-act.module').then( m => m.PerfilActPageModule)
-  // },
   {
     path: 'perfil-add',
     loadChildren: () => import('./perfiles/perfil-add/perfil-add.module').then( m => m.PerfilAddPageModule)
@@ -110,21 +100,11 @@ const routes: Routes = [
     path: 'drums',
     loadChildren: () => import('./drums/drums.module').then( m => m.DrumsPageModule)
   },
-  
-  
+  {
+    path: '**',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
 
-
-
-  
- 
-  
-
-
-//   {
-//     path: '**',
-//     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
-//   },
-// ##
 
 ];
 

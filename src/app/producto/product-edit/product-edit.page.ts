@@ -19,6 +19,12 @@ import { Component, OnInit } from '@angular/core';
 
 
   export class ProductEditPage implements OnInit {
+
+    nombreprodErrorL: string = '';
+    precioErrorL: string = '';
+
+
+
     productForm!: FormGroup;
     producto: ClProducto = {
       idProducto: 0,
@@ -69,10 +75,51 @@ import { Component, OnInit } from '@angular/core';
   }
 }
 
-async onFormSubmit() {
-  console.log("onFormSubmit ID:" + this.id);
+// async onFormSubmit() {
+//   console.log("onFormSubmit ID:" + this.id);
 
+//   if (this.productForm.valid) {
+//     if (this.producto && this.producto.idProducto) {
+//       this.producto.idProducto = this.id;
+//       this.producto.nombreprod = this.productForm.value.nombreprod;
+//       this.producto.direccion = this.productForm.value.direccion;
+//       this.producto.precio = this.productForm.value.precio;
+
+//       await this.restApi.updateProduct(this.id, this.producto).subscribe({
+//         next: (res) => {
+//           let id = res['idProducto'];
+//           this.presentAlertConfirm('Producto actualizado exitosamente.');
+//         },
+//         complete: () => {},
+//         error: (err) => {
+//           console.log(err);
+//           this.presentAlertConfirm('Error al actualizar el producto.');
+//         },
+//       });
+//     } else {
+//       console.error('El objeto producto o su propiedad idProducto es undefined');
+//       // Puedes mostrar un mensaje de error al usuario si es necesario.
+//     }
+//   }
+// }
+
+
+async onFormSubmit() {
   if (this.productForm.valid) {
+    this.nombreprodErrorL = ''; // Reinicia el mensaje de error
+    this.precioErrorL = ''; // Reinicia el mensaje de error
+
+    if (!/^[a-zA-Z]+$/.test(this.productForm.value.nombreprod)) {
+      this.nombreprodErrorL = 'El nombre del producto solo debe contener letras.';
+      return;
+    }
+
+    if (!/^\d+$/.test(this.productForm.value.precio.toString())) {
+      this.precioErrorL = 'El precio del producto debe ser un número entero.';
+      return;
+    }
+    
+
     if (this.producto && this.producto.idProducto) {
       this.producto.idProducto = this.id;
       this.producto.nombreprod = this.productForm.value.nombreprod;
@@ -96,6 +143,9 @@ async onFormSubmit() {
     }
   }
 }
+
+
+
 
 async getProduct(id: number) {
   const loading = await this.loadingController.create({
