@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service'; // Asegúrate de que la ruta sea correcta
+
 
 
 @Component({
@@ -18,7 +20,8 @@ export class LoginPage {
   constructor(
     private navCtrl: NavController,
     private router: Router,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private AuthService:AuthService,
   ) {}
 
 
@@ -69,6 +72,8 @@ export class LoginPage {
     if (this.username === 'ADMIN' && this.password === 'Duocuc123456') {
       // Si el usuario es administrador, redirige a 'product-list'
       console.log("esta pasando ")
+      
+      this.AuthService.login();
       this.router.navigate(['/product-list']);
     } else {
       // De lo contrario, redirige a 'home'

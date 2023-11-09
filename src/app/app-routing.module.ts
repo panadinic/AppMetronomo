@@ -41,11 +41,12 @@ const routes: Routes = [
     path: 'product-edit',
     loadChildren: () => import('./producto/product-edit/product-edit.module').then( m => m.ProductEditPageModule)
   },
-  {
+ {
     path: 'product-list',
-    loadChildren: () => import('./producto/product-list/product-list.module').then(m => m.ProductListPageModule)
+    loadChildren: () => import('./producto/product-list/product-list.module').then(m => m.ProductListPageModule),
+    canActivate: [AdminGuard]
   },
-  // {
+  // 
   //   path: 'product-list',
   //   loadChildren: () => import('./producto/product-list/product-list.module').then( m => m.ProductListPageModule),
   //   canActivate: [AdminGuard]

@@ -6,23 +6,26 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuthenticated: boolean = false;
-  public isAdmin: boolean = false; // Propiedad para controlar si el usuario es administrador
-  constructor(private router: Router) {}
-  // Función para iniciar sesión
-  login(username: string, password: string) {
-    // Realiza la autenticación (verifica el nombre de usuario y la contraseña)
+  private isAuthenticated = false;
+  public isAdmin = false; // Propiedad para controlar si el usuario es administrador
 
-    if (username === 'ADMIN' && password === 'Duocuc123456') {
-      this.isAuthenticated = true;
-      this.isAdmin = true;
-      this.router.navigate(['/product-list']); // Establece como administrador
-    } else {
-      this.router.navigate(['/home']);
-    }
+  constructor(private router: Router) {}
+
+  // Método para iniciar sesión
+  login() {
+    this.isAuthenticated = true;
+    this.isAdmin = true;
+    // ... cualquier otra lógica de inicio de sesión
   }
 
-  // Función para verificar si el usuario está autenticado
+  // Método para cerrar sesión
+  logout() {
+    this.isAuthenticated = false;
+    this.isAdmin = false;
+    // ... cualquier otra lógica de cierre de sesión
+  }
+
+  // Método para verificar si el usuario está autenticado
   isAuthenticatedUser() {
     return this.isAuthenticated;
   }
