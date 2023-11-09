@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './admin.guard'; // Reemplaza con la ruta correcta hacia el guardia
+
 
 
 
@@ -41,8 +43,14 @@ const routes: Routes = [
   },
   {
     path: 'product-list',
-    loadChildren: () => import('./producto/product-list/product-list.module').then( m => m.ProductListPageModule)
+    loadChildren: () => import('./producto/product-list/product-list.module').then(m => m.ProductListPageModule)
   },
+  // {
+  //   path: 'product-list',
+  //   loadChildren: () => import('./producto/product-list/product-list.module').then( m => m.ProductListPageModule),
+  //   canActivate: [AdminGuard]
+  // },
+  
   { path: 'product-detail/:idProducto', loadChildren: () => import('./producto/product-detail/product-detail.module').then(m => m.ProductDetailPageModule) },
   { path: 'product-edit/:id', loadChildren: () => import('./producto/product-edit/product-edit.module').then(m => m.ProductEditPageModule) },
   {
