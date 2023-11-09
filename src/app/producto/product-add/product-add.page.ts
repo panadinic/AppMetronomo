@@ -14,8 +14,7 @@ export class ProductAddPage implements OnInit {
  
   nombreprodErrorL: string ="";
   precioErrorL: string ="";
-
-
+  direccionErrorL: string = "";
 
   productForm!: FormGroup;
   // Generalmente se usa una interface, sin embargo para jugar utilizaremos  una clase
@@ -66,6 +65,8 @@ async onFormSubmit(form: NgForm) {
   // Reset de mensajes de error
   this.nombreprodErrorL = '';
   this.precioErrorL = '';
+  this.direccionErrorL = '';
+
 
   // Validación para el nombre del producto (solo letras)
   if (!/^[A-Za-z]+$/.test(this.producto.nombreprod)) {
@@ -78,6 +79,12 @@ async onFormSubmit(form: NgForm) {
     this.precioErrorL = 'El precio del producto debe ser un número entero válido.';
     return;
   }
+
+    // Validación para el precio (solo números)
+    if (!/^[A-Za-z]+$/.test(this.producto.direccion)) {
+      this.direccionErrorL = 'La descripcion del producto debe contener solo letras.';
+      return;
+    }
   
 
   // Crear un Loading Controller

@@ -32,7 +32,9 @@
       <ion-label position="floating">Descripción</ion-label>
       <ion-textarea [(ngModel)]="producto.direccion" type="text" formControlName="prod_desc"></ion-textarea>
     </ion-item>
-   
+    <div *ngIf="direccionErrorL" class="error-message">
+      {{ direccionErrorL }}
+    </div>
     <ion-button type="submit" shape="round" color="primary" expand="block"
       [disabled]="!productForm.valid">Submit</ion-button>
   </form>
