@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service'; // Asegúrate de que la ruta sea correcta
-
+import { Storage } from '@ionic/storage-angular';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class LoginPage {
     private router: Router,
     private toastCtrl: ToastController,
     private AuthService:AuthService,
+    private storage: Storage
   ) {}
 
 
@@ -49,8 +50,10 @@ export class LoginPage {
   // }
   
 
-  login() {
-    const passwordPattern = /^(?=.*\d{4})(?=.*[a-zA-Z]{3})(?=.*[A-Z]).{8,}$/;
+  async login() {
+    // const passwordPattern = /^(?=.*\d{4})(?=.*[a-zA-Z]{3})(?=.*[A-Z]).{8,}$/;
+    const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&*]).{8,}$/;
+
     const usernamePattern = /^[a-zA-Z]+$/;
   
     if (this.username.length < 3 || this.username.length > 8 || !usernamePattern.test(this.username)) {
@@ -66,21 +69,48 @@ export class LoginPage {
     } else {
       this.passwordErrorL = '';
     }
+
+
+
+    
+
   
     // Realiza la autenticación (verifica el nombre de usuario y la contraseña)
   
-    if (this.username === 'ADMIN' && this.password === 'Duocuc123456') {
-      // Si el usuario es administrador, redirige a 'product-list'
-      console.log("esta pasando ")
+    // if (this.username === 'ADMIN' && this.password === 'Duocuc123*') {
+    //   // Si el usuario es administrador, redirige a 'product-list'
+    //   console.log("esta pasando ")
       
-      this.AuthService.login();
-      this.router.navigate(['/product-list']);
+    //   this.AuthService.login();
+    //   this.router.navigate(['/product-list']);
+    // } 
+
+
+    // const isAuthenticated = await this.AuthService.authenticate(this.username, this.password);
+    // if (isAuthenticated) {
+    //   // Si la autenticación es exitosa, redirigir al home
+    //   this.router.navigate(['/home', { username: this.username }]);
+    // } else {
+    //   // Si la autenticación falla, mostrar un mensaje de error
+    //   this.showToast('Credenciales incorrectas');
+    // }
+
+    const isAuthenticated = await this.AuthService.authenticate(this.username, this.password);
+
+    if (isAuthenticated && this.AuthService.isAdmin) {
+        // Si el usuario es ADMIN, redirigir a product-list
+        this.router.navigate(['/product-list']);
+    } else if (isAuthenticated) {
+        // Si la autenticación es exitosa para otros usuarios, redirigir a home
+        this.router.navigate(['/home']);
     } else {
-      // De lo contrario, redirige a 'home'
-      this.router.navigate(['/home', { username: this.username }]);
+        // Si la autenticación falla, mostrar un mensaje de error
+        this.showToast('Credenciales incorrectas');
     }
   }
   
+
+
   
 
 

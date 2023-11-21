@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-registro',
@@ -21,7 +22,9 @@ export class RegisterPage {
 
   mostrarContrasena: boolean = false;
 
-  constructor(private navCtrl: NavController, private toastController: ToastController) {}
+  constructor(private navCtrl: NavController, private toastController: ToastController, private storage: Storage) {
+    this.storage.create(); // Inicializar el storage
+  }
 
   async enviarRegistro() {
     // Limpiar mensajes de error al inicio
@@ -98,7 +101,24 @@ export class RegisterPage {
   
     if (!this.usuarioError && !this.emailError && !this.contrasenaError && !this.error) {
       // Si no hay errores en ningún campo, redirigir a otra página
+
+      const usuarioGuardado = await this.guardarUsuario();
+    if (usuarioGuardado) {
+      // Si el usuario se guardó correctamente
+      // Mostrar mensaje de éxito y redirigir
+      const toast = await this.toastController.create({
+        message: 'Registro exitoso',
+        duration: 2000,
+        color: 'success',
+      });
+      toast.present();
+      console.log("usuario guardado")
       this.navCtrl.navigateForward('/login');
+    } else {
+      // Mostrar mensaje de que el usuario ya existe
+      this.usuarioError = 'El usuario ya existe.';
+    }
+      
     }
   }
 
@@ -134,6 +154,19 @@ toggleMostrarClave() {
 onRepetirClaveChange() {
   this.error = '';
 }
+
+async guardarUsuario() {
+  const usuarios = (await this.storage.get('usuarios')) || {};
+  if (usuarios[this.usuario]) {
+    // El usuario ya existe
+    return false;
+  }
+  usuarios[this.usuario] = { contrasena: this.contrasena, correo: this.correo, fechaNacimiento: this.fechaNacimiento };
+  await this.storage.set('usuarios', usuarios);
+  return true;
+}
+
+
 
 
   ngOnInit() {

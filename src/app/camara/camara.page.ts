@@ -53,5 +53,11 @@ export class CamaraPage implements OnInit {
     this.router.navigate(['product-list']);
     this.menu.close('end'); // Cierra el menú
   }
+
+  // async deletePhoto(index: number) {
+  //   await this.photoService.deletePhoto(index);
+  //   // Opcional: Mostrar algún mensaje de confirmación o actualizar la vista
+  // }
+
 }
 
