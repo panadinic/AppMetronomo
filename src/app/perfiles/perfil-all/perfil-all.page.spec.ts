@@ -5,11 +5,11 @@ describe('PerfilAllPage', () => {
   let component: PerfilAllPage;
   let fixture: ComponentFixture<PerfilAllPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(PerfilAllPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

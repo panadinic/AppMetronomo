@@ -5,7 +5,8 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "Metronomo.app"
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion 22
+        rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"

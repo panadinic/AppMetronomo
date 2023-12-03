@@ -102,7 +102,7 @@ export class LoginPage {
         this.router.navigate(['/product-list']);
     } else if (isAuthenticated) {
         // Si la autenticación es exitosa para otros usuarios, redirigir a home
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home',{ username: this.username }]);
     } else {
         // Si la autenticación falla, mostrar un mensaje de error
         this.showToast('Credenciales incorrectas');
