@@ -18,6 +18,7 @@ import { ProductListPage } from '../producto/product-list/product-list.page';
 })
 
 export class HomePage {
+  private tapTimes: number[] = [];
   sliderValue: number = 20;
   tempoVariation: number = 50;
   volume: number = 50;
@@ -80,37 +81,67 @@ export class HomePage {
     this.clickSound.nativeElement.muted = false;
   }
 
-
+  updateMetronome() {
+    if (this.metronomeOn) {
+      this.startMetronome();
+    }
+  }
+  
 
   increaseBPM() {
-    // Implementa la lógica para aumentar el valor del ritmo (bpm)
-    if (this.sliderValue < 300) { // Por ejemplo, puedes definir un valor máximo (300 en este caso)
-      this.sliderValue += 10; // Aumenta el valor del ritmo en 10 unidades
+    if (this.sliderValue < 300) {
+      this.sliderValue++;
+      this.updateMetronome();
     }
   }
-
+  
   decreaseBPM() {
-    // Implementa la lógica para disminuir el valor del ritmo (bpm)
-    if (this.sliderValue > 10) { // Por ejemplo, puedes definir un valor mínimo (10 en este caso)
-      this.sliderValue -= 10; // Disminuye el valor del ritmo en 10 unidades
+    if (this.sliderValue > 40) {
+      this.sliderValue--;
+      this.updateMetronome();
     }
   }
-
+  
 
 
   onSliderChange(event: any) {
-    const newValue = event.detail.value;
-
-    if (newValue < 40) {
-      this.sliderValue = 40;
-    } else if (newValue > 300) {
-      this.sliderValue = 300;
-    } else {
-      this.sliderValue = newValue;
-    }
-
-    // Luego, aquí puedes agregar cualquier lógica adicional que necesites en función del valor actual del slider.
+    this.sliderValue = event.detail.value;
+    this.updateMetronome();
   }
+  
+  tapTempo() {
+    const now = Date.now();
+  
+    // Si el último tap fue hace más de 2 segundos, reinicia el arreglo
+    if (this.tapTimes.length && now - this.tapTimes[this.tapTimes.length - 1] > 2000) {
+      this.tapTimes = [];
+    }
+  
+    this.tapTimes.push(now);
+  
+    // Calcula el tempo solo si hay al menos 2 toques
+    if (this.tapTimes.length > 1) {
+      let sumIntervals = 0;
+      let countIntervals = 0;
+  
+      // Suma los intervalos entre los taps
+      for (let i = 1; i < this.tapTimes.length; i++) {
+        sumIntervals += (this.tapTimes[i] - this.tapTimes[i - 1]);
+        countIntervals++;
+      }
+  
+      const averageInterval = sumIntervals / countIntervals;
+  
+      // Convierte el intervalo promedio en BPM
+      const newTempo = 60000 / averageInterval;
+      this.sliderValue = Math.round(newTempo);
+  
+      // Actualiza el metrónomo si está encendido
+      this.updateMetronome();
+    }
+  }
+  
+  
 
   toggleMetronome() {
     this.metronomeOn = !this.metronomeOn;
@@ -122,21 +153,23 @@ export class HomePage {
     }
   }
   startMetronome() {
-     if (this.isPlaying) return;
-
-    this.stopMetronome();
-
+    if (this.isPlaying) {
+      this.stopMetronome();
+    }
+  
     const bpm = this.sliderValue;
     const intervalMs = (60 / bpm) * 1000;
-
+  
     this.interval = setInterval(() => {
       if (this.metronomeOn) {
         this.playClickSound();
       }
     }, intervalMs);
-
+  
     this.isPlaying = true;
   }
+  
+  
 
   stopMetronome() {
     if (this.interval) {

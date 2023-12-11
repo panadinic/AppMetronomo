@@ -1,13 +1,37 @@
+
 .piano {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 5px;
-  
-    ion-button {
-      flex: 1;
-      width: 30px;
-      height: 120px;
-    }
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.octave {
+  display: flex;
+  justify-content: center;
+}
+
+.octave .note {
+  width: 40px; /* Ajusta al tamaño deseado */
+  height: 80px; /* Ajusta al tamaño deseado */
+  margin: 2px;
+  border: 1px solid #000; /* Añade un borde para simular las teclas del piano */
+  background-color: #fff; /* Color de las teclas blancas */
+}
+
+.octave .note.sharp {
+  width: 20px; /* Ajusta al tamaño deseado */
+  height: 50px; /* Ajusta al tamaño deseado */
+  background-color: #333; /* Color de las teclas negras */
+  position: relative;
+  margin-left: -20px; /* Ajusta para que las teclas negras se superpongan parcialmente sobre las blancas */
+  z-index: 1;
+}
+
+/* Ajustes para el control de volumen */
+ion-item {
+  width: 100%; /* Ajusta al tamaño deseado */
+  padding: 10px;
+}
+
+

@@ -1,56 +1,43 @@
+
 .content-grid {
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around; /* Esto distribuirá los elementos uniformemente */
+  padding: 0;
+  margin: 0;
+  height: 100%; /* O min-height: 100vh; si quieres asegurarte de que ocupe al menos la altura de la pantalla */
 }
 
 .row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  flex-grow: 1;
-}
-
-.tempovariation,
-.volumen {
-  width: 100%;
-  margin-top: 1rem;
+  margin-bottom: 0.5rem; /* Ajusta el margen según sea necesario */
 }
 
 .custom-box {
-  padding: 1rem;
+  padding: 0.5rem; /* Ajusta el relleno según sea necesario */
 }
 
-
-
-
-/* Define la animación fade-in */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+/* Espaciado alrededor de los botones */
+ion-button {
+  margin: 0.5rem; /* Añade un margen alrededor de los botones para separarlos */
 }
 
-.fade-in {
-  animation: fade-in 4.0s ease-out; /* Aplica la animación */
+/* Espaciado adicional para el botón Tap */
+.tap-button {
+  margin-top: 1rem; /* Añade un margen superior extra para el botón Tap */
 }
 
-
-/* Estilo para el contenedor del icono de volumen */
-.custom-volume-icon {
-  display: flex;
-  justify-content: flex-start; /* Alinea el icono a la izquierda */
-  align-items: flex-start; /* Alinea verticalmente arriba */
+/* Ajustar los sliders para que no toquen los bordes */
+ion-range {
+  margin: 0.5rem 0; /* Añade un margen superior e inferior */
 }
 
-/* Estilo para el icono de volumen */
-.volume-icon {
-  font-size: 32px; /* Tamaño personalizado */
-  transform: translateY(-40px); /* Ajusta la posición vertical hacia arriba */
+/* Asegúrate de que los selectores no sean demasiado anchos */
+ion-select {
+  max-width: 200px; /* O un valor que se adapte a tu diseño */
+  margin: 0 auto; /* Centrar el selector si es más pequeño que el ancho disponible */
 }
 
+/* Centrar el botón Volver en la pantalla */
+.volver-button {
+  margin: 1rem auto; /* Añade un margen superior e inferior y centra horizontalmente */
+}
