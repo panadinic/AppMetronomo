@@ -8,6 +8,7 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { Geolocation } from '@capacitor/geolocation';
 import { MenuController } from '@ionic/angular';
 import { ProductListPage } from '../producto/product-list/product-list.page';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -38,7 +39,9 @@ export class HomePage {
   metronomeOn: boolean = false;
   isMuted: boolean = false;
 
-  username: string = '';
+  // username: string = '';
+
+  username: string | null = null;
   @ViewChild('clickSound') clickSound: any;
 
   private interval: any;
@@ -62,7 +65,10 @@ export class HomePage {
                 private route: ActivatedRoute, 
                 private navCtrl: NavController,
                 public photoService: PhotoService,
-                private menu: MenuController ){
+                private menu: MenuController,
+                private authService: AuthService ){
+
+               
 
     defineCustomElements(window);             
 

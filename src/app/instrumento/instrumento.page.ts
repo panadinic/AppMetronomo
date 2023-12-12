@@ -8,6 +8,7 @@ import { PolySynth,  Gain, Compressor } from 'tone';
   styleUrls: ['./instrumento.page.scss'],
 })
 export class InstrumentoPage {
+  username: string = '';
   isLoopPlaying: boolean = false;
   compressor: Compressor;
   polySynth: PolySynth;

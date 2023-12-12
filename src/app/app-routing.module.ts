@@ -27,19 +27,23 @@ const routes: Routes = [
 
   {
     path: 'product-add',
-    loadChildren: () => import('./producto/product-add/product-add.module').then( m => m.ProductAddPageModule)
+    loadChildren: () => import('./producto/product-add/product-add.module').then( m => m.ProductAddPageModule),
+    canActivate: [AdminGuard]
   },
   {
     path: 'product-all',
-    loadChildren: () => import('./producto/product-all/product-all.module').then( m => m.ProductAllPageModule)
+    loadChildren: () => import('./producto/product-all/product-all.module').then( m => m.ProductAllPageModule),
+    canActivate: [AdminGuard]
   },
   {
     path: 'product-detail',
-    loadChildren: () => import('./producto/product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
+    loadChildren: () => import('./producto/product-detail/product-detail.module').then( m => m.ProductDetailPageModule),
+    canActivate: [AdminGuard]
   },
   {
     path: 'product-edit',
-    loadChildren: () => import('./producto/product-edit/product-edit.module').then( m => m.ProductEditPageModule)
+    loadChildren: () => import('./producto/product-edit/product-edit.module').then( m => m.ProductEditPageModule),
+    canActivate: [AdminGuard]
   },
  {
     path: 'product-list',
