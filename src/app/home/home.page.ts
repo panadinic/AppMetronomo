@@ -17,7 +17,19 @@ import { ProductListPage } from '../producto/product-list/product-list.page';
   styleUrls: ['home.page.scss'],
 })
 
+
+
 export class HomePage {
+
+  private audioContext = new AudioContext();
+  private nextTickTime = 0;
+  private scheduleTimer?: number;
+  private lookahead = 25; // ms, tiempo para mirar hacia adelante en el calendario
+  private tickLength = 0.05; // segundos, duración de cada tick
+
+
+
+
   private tapTimes: number[] = [];
   sliderValue: number = 20;
   tempoVariation: number = 50;
@@ -32,15 +44,18 @@ export class HomePage {
   private interval: any;
   private isPlaying: boolean = false;
 
-    // Declaración de las opciones de sonido y el sonido seleccionado
-    soundOptions: any[] = [
-      { name: 'Clasic', path: 'assets/CLASIC_BEAT.mp3' },
-      { name: 'Cubase_High', path: 'assets/CUBASE_HIGH2.mp3' },
-      { name: 'Cubase_Low', path: 'assets/CUBASE_LOW2.mp3' },
-      // Agrega más opciones de sonido según sea necesario
-    ];
 
+    soundOptions: any[] = [
+      { name: 'High Sine', type: 'sine', frequency: 880 }, // Sine wave, high frequency
+      { name: 'Low Sine', type: 'sine', frequency: 440 },  // Sine wave, low frequency
+      { name: 'Square', type: 'square', frequency: 440 },  // Square wave
+      // Agrega más opciones según sea necesario
+    ];
+    
     selectedSound: any = this.soundOptions[0];
+
+    selectedSoundName: string = this.soundOptions[0].name;
+    
 
     constructor(private platform: Platform, 
                 private router: Router, 
@@ -67,6 +82,11 @@ export class HomePage {
     } else {
       this.unmuteSound();
     }
+  }
+
+  onSoundChange(event: any) {
+    const newSoundName = event.detail.value;
+    this.selectedSound = this.soundOptions.find(sound => sound.name === newSoundName);
   }
   
   private muteSound() {
@@ -152,54 +172,64 @@ export class HomePage {
       this.stopMetronome();
     }
   }
+
   startMetronome() {
-    if (this.isPlaying) {
-      this.stopMetronome();
+    if (!this.isPlaying) {
+      this.isPlaying = true;
+      this.nextTickTime = this.audioContext.currentTime;
+      this.scheduler();
     }
-  
-    const bpm = this.sliderValue;
-    const intervalMs = (60 / bpm) * 1000;
-  
-    this.interval = setInterval(() => {
-      if (this.metronomeOn) {
-        this.playClickSound();
-      }
-    }, intervalMs);
-  
-    this.isPlaying = true;
   }
   
-  
-
   stopMetronome() {
-    if (this.interval) {
-      clearInterval(this.interval);
-      this.isPlaying = false;
-    }
+    this.isPlaying = false;
+    clearTimeout(this.scheduleTimer);
   }
+  
 
-
-  playClickSound() {
-    console.log('Reproduciendo sonido...');
-
-    if (this.platform.is('cordova')) {
-      const clickSound = new Audio(this.selectedSound.path); // Utiliza el sonido seleccionado
-      clickSound.volume = this.volume / 100;
-      clickSound.play();
-    } else {
-      this.clickSound.nativeElement.src = this.selectedSound.path; // Utiliza el sonido seleccionado
-      this.clickSound.nativeElement.volume = this.volume / 100;
-      this.clickSound.nativeElement.play();
-    }
+  playClickSound(time: number) {
+    const oscillator = this.audioContext.createOscillator();
+    const gainNode = this.audioContext.createGain();
+  
+    // Usa el tipo de onda y la frecuencia seleccionados
+    oscillator.type = this.selectedSound.type;
+    oscillator.frequency.value = this.selectedSound.frequency;
+  
+    gainNode.gain.value = this.volume / 100; // Controla el volumen
+  
+    oscillator.connect(gainNode);
+    gainNode.connect(this.audioContext.destination);
+  
+    oscillator.start(time);
+    oscillator.stop(time + this.tickLength);
   }
+  
 
-  volver() {
+  scheduler() {
+    while (this.nextTickTime < this.audioContext.currentTime + this.lookahead / 1000) {
+      this.playClickSound(this.nextTickTime);
+      this.nextTickTime += 60 / this.sliderValue;
+    }
+    this.scheduleTimer = window.setTimeout(() => this.scheduler(), this.lookahead);
+  }
+  
+
+  ngOnDestroy() {
+    this.stopMetronome();
+  }
+  
+  
+
+
+  logout() {
+    // Aquí limpias cualquier dato relacionado con el usuario o sesión
+    // Por ejemplo, si estás usando localStorage para almacenar un token de autenticación:
+    localStorage.removeItem('userToken');
+    // O si tienes un servicio de autenticación, llama a su método de logout
+
+    // Redirigir al usuario a la página de inicio de sesión
     this.router.navigate(['/login']);
   }
-
-
-
- 
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
